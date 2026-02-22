@@ -9,7 +9,11 @@ interface ServicesSectionProps {
 
 export function ServicesSection({ services, onReserve }: ServicesSectionProps) {
   const handleReserve = (service?: Service) => {
-    onReserve?.(service) ?? (typeof window !== 'undefined' && window.alert(`Reserva (mock): ${service ? service.name : 'Servicio'} — Próximamente.`));
+    if (onReserve) {
+      onReserve(service);
+    } else if (typeof window !== 'undefined') {
+      window.alert(`Reserva (mock): ${service ? service.name : 'Servicio'} — Próximamente.`);
+    }
   };
 
   return (
