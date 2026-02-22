@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import type { Company } from '../types';
@@ -20,7 +20,7 @@ interface NavbarProps {
   onReserve?: () => void;
 }
 
-export function Navbar({ company, onReserve }: NavbarProps) {
+export function Navbar({ company }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -29,10 +29,6 @@ export function Navbar({ company, onReserve }: NavbarProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleReserve = () => {
-    onReserve?.() ?? (typeof window !== 'undefined' && window.alert('Reserva (mock): Próximamente podrás reservar aquí.'));
-  };
 
   return (
     <nav
@@ -45,7 +41,7 @@ export function Navbar({ company, onReserve }: NavbarProps) {
           {company.logo ? (
             <img src={company.logo} alt={company.name} className="h-8 w-auto" />
           ) : (
-            <div className="w-8 h-8 bg-red-600 flex items-center justify-center transform -skew-x-12">
+            <div className="w-8 h-8 bg-accent flex items-center justify-center transform -skew-x-12">
               <span className="font-black italic text-xl text-white">{company.name.charAt(0)}</span>
             </div>
           )}
@@ -57,18 +53,17 @@ export function Navbar({ company, onReserve }: NavbarProps) {
             <a
               key={link.name}
               href={link.href}
-              className="text-xs font-bold tracking-widest text-white/90 hover:text-red-600 transition-colors uppercase"
+              className="text-xs font-bold tracking-widest text-white/90 hover:text-accent transition-colors uppercase outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded px-1 py-0.5"
             >
               {link.name}
             </a>
           ))}
-          <button
-            type="button"
-            onClick={handleReserve}
-            className="bg-red-600 text-white px-6 py-3 text-xs font-bold tracking-widest hover:bg-white hover:text-black transition-all transform hover:scale-105 active:scale-95"
+          <a
+            href="#servicios"
+            className="btn-accent bg-accent text-white px-6 py-3 text-xs font-bold tracking-widest hover:bg-white hover:text-[var(--accent)] transition-all transform hover:scale-[1.02] active:scale-[0.98] rounded-sm"
           >
             RESERVAR AHORA
-          </button>
+          </a>
         </div>
 
         <button
@@ -94,22 +89,19 @@ export function Navbar({ company, onReserve }: NavbarProps) {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-2xl font-bold tracking-widest text-white hover:text-red-600 transition-colors"
+                className="text-2xl font-bold tracking-widest text-white hover:text-accent transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
               </a>
             ))}
-            <button
-              type="button"
-              onClick={() => {
-                handleReserve();
-                setIsMenuOpen(false);
-              }}
-              className="bg-red-600 text-white px-10 py-4 text-sm font-bold tracking-widest"
+            <a
+              href="#servicios"
+              className="btn-accent bg-accent text-white px-10 py-4 text-sm font-bold tracking-widest hover:bg-white hover:text-[var(--accent)] rounded-sm"
+              onClick={() => setIsMenuOpen(false)}
             >
               RESERVAR AHORA
-            </button>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

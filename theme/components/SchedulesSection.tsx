@@ -1,9 +1,9 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import type { ScheduleItem } from '../types';
 
 interface SchedulesSectionProps {
   schedules: ScheduleItem[];
+  scheduleBgImage?: string;
 }
 
 function formatHours(item: ScheduleItem): string {
@@ -11,12 +11,12 @@ function formatHours(item: ScheduleItem): string {
   return `${item.open} - ${item.close}`;
 }
 
-export function SchedulesSection({ schedules }: SchedulesSectionProps) {
+export function SchedulesSection({ schedules, scheduleBgImage }: SchedulesSectionProps) {
   return (
     <section id="horarios" className="barberias-aureo-schedules py-16 sm:py-24 bg-black relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
         <img
-          src="https://picsum.photos/seed/barber-schedule/1920/1080"
+          src={scheduleBgImage ?? ''}
           alt=""
           className="w-full h-full object-cover grayscale"
           aria-hidden
@@ -31,9 +31,9 @@ export function SchedulesSection({ schedules }: SchedulesSectionProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-zinc-900/90 backdrop-blur-sm p-8 sm:p-10 border-l-4 border-red-600 rounded-r-lg"
+            className="bg-zinc-900/90 backdrop-blur-sm p-8 sm:p-10 border-l-4 border-accent rounded-r-lg shadow-lg"
           >
-            <h2 className="text-2xl font-black text-red-600 uppercase tracking-widest mb-8">Horarios</h2>
+            <h2 className="text-2xl font-black text-accent uppercase tracking-widest mb-8">Horarios</h2>
             <div className="space-y-4">
               {schedules.map((item) => (
                 <div
@@ -41,7 +41,7 @@ export function SchedulesSection({ schedules }: SchedulesSectionProps) {
                   className="flex justify-between border-b border-white/10 pb-2 text-sm"
                 >
                   <span className="font-bold text-white uppercase tracking-widest">{item.day}</span>
-                  <span className={item.closed ? 'text-red-600 font-bold' : 'text-gray-400'}>
+                  <span className={item.closed ? 'text-accent font-bold' : 'text-gray-400'}>
                     {formatHours(item)}
                   </span>
                 </div>

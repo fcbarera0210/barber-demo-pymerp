@@ -38,11 +38,41 @@ export interface Service {
   icon?: string;
 }
 
+export interface ProfessionalSocialLink {
+  name: string;
+  url: string;
+  icon?: string;
+}
+
 export interface Professional {
   id?: string;
   name: string;
   photo: string;
   specialties: string[];
+  /** Contacto (teléfono/WhatsApp) para reservas */
+  contact?: string;
+  /** Redes sociales del profesional */
+  socialLinks?: ProfessionalSocialLink[];
+}
+
+/** Disponibilidad por día para el calendario de reservas */
+export type DayAvailability = 'past' | 'available' | 'few_slots' | 'full';
+
+/** Slot de horario para reserva (por fecha) */
+export interface TimeSlot {
+  id: string;
+  start: string;
+  end: string;
+  professionalIds: string[];
+}
+
+/** Datos del cliente en el formulario de reserva */
+export interface BookingClientForm {
+  fullName: string;
+  rut: string;
+  whatsapp: string;
+  email?: string;
+  comments?: string;
 }
 
 export interface ScheduleItem {
@@ -87,6 +117,12 @@ export interface ThemeProps {
   benefits?: Benefit[];
   /** Opcional: URLs galería (mock o futuro CMS) */
   galleryImages?: string[];
+  /** Opcional: URL imagen hero */
+  heroImage?: string;
+  /** Opcional: URL imagen fondo sección horarios */
+  scheduleBgImage?: string;
+  /** Opcional: URL placeholder mapa/ubicación */
+  mapImage?: string;
 }
 
 /** Trust / Social proof (puede venir de company o mocks) */

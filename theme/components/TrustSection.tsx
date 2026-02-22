@@ -1,4 +1,3 @@
-import React from 'react';
 import { Icon } from '@iconify/react';
 import type { TrustData } from '../types';
 
@@ -15,7 +14,7 @@ export function TrustSection({ trust }: TrustSectionProps) {
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16 text-center">
           <div className="flex items-center gap-2">
-            <div className="flex gap-0.5 text-red-600">
+            <div className="flex gap-0.5 text-accent">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Icon key={i} icon={i < fullStars ? 'mdi:star' : i === fullStars && hasHalf ? 'mdi:star-half-full' : 'mdi:star-outline'} className="text-2xl" />
               ))}

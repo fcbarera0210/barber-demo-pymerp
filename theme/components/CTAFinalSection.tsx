@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 interface CTAFinalSectionProps {
@@ -27,7 +26,7 @@ export function CTAFinalSection({ title, onReserve }: CTAFinalSectionProps) {
           <button
             type="button"
             onClick={handleReserve}
-            className="bg-red-600 text-white px-10 py-4 text-sm font-bold tracking-widest hover:bg-white hover:text-black transition-all transform hover:scale-105 active:scale-95"
+            className="btn-accent bg-accent text-white px-10 py-4 text-sm font-bold tracking-widest hover:bg-white hover:text-[var(--accent)] transition-all transform hover:scale-[1.02] active:scale-[0.98] rounded-sm"
           >
             Reservar ahora
           </button>

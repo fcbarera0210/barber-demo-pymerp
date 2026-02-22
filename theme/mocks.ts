@@ -13,6 +13,8 @@ import type {
   Testimonial,
   Benefit,
   TrustData,
+  DayAvailability,
+  TimeSlot,
 } from './types';
 
 export const mockCompany: Company = {
@@ -37,18 +39,70 @@ export const mockAppearance: Appearance = {
 };
 
 export const mockServices: Service[] = [
-  { name: 'Corte de pelo', price: 'Desde $30', duration: '45 min', description: 'Corte clásico o moderno adaptado a tu estilo.', icon: 'mdi:content-cut' },
-  { name: 'Bigote', price: 'Desde $20', duration: '20 min', description: 'Perfilado y cuidado experto.', icon: 'mdi:moustache' },
-  { name: 'Afeitado', price: 'Desde $25', duration: '30 min', description: 'Afeitado tradicional a navaja con toallas calientes.', icon: 'mdi:razor-double-edge' },
-  { name: 'Peinado', price: 'Desde $15', duration: '15 min', description: 'Acabado profesional con productos de alta gama.', icon: 'mdi:hair-dryer' },
-  { name: 'Recorte de barba', price: 'Desde $20', duration: '25 min', description: 'Diseño y mantenimiento de barba.', icon: 'mdi:beard' },
-  { name: 'Tinte de cabello', price: 'Desde $40', duration: '60 min', description: 'Coloración con productos que cuidan tu cabello.', icon: 'mdi:palette' },
+  { id: 'svc-1', name: 'Corte de pelo', price: 'Desde $30', duration: '45 min', description: 'Corte clásico o moderno adaptado a tu estilo.', icon: 'mdi:content-cut' },
+  { id: 'svc-2', name: 'Bigote', price: 'Desde $20', duration: '20 min', description: 'Perfilado y cuidado experto.', icon: 'mdi:mustache' },
+  { id: 'svc-3', name: 'Afeitado', price: 'Desde $25', duration: '30 min', description: 'Afeitado tradicional a navaja con toallas calientes.', icon: 'mdi:razor-double-edge' },
+  { id: 'svc-4', name: 'Peinado', price: 'Desde $15', duration: '15 min', description: 'Acabado profesional con productos de alta gama.', icon: 'mdi:hair-dryer' },
+  { id: 'svc-5', name: 'Recorte de barba', price: 'Desde $20', duration: '25 min', description: 'Diseño y mantenimiento de barba.', icon: 'mdi:face-man' },
+  { id: 'svc-6', name: 'Tinte de cabello', price: 'Desde $40', duration: '60 min', description: 'Coloración con productos que cuidan tu cabello.', icon: 'mdi:palette' },
 ];
 
+/** URLs de imágenes temáticas (barbería / cortes masculinos). Fuente: Unsplash (licencia libre). */
+export const MOCK_IMAGE_URLS = {
+  hero: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1920&q=80',
+  gallery: [
+    'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80',
+    'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80',
+    'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80',
+    'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80',
+    'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80',
+    'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80',
+    'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80',
+    'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80',
+  ],
+  team: [
+    'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=400&q=80',
+    'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=400&q=80',
+    'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&q=80',
+  ],
+  scheduleBg: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1920&q=80',
+  mapPlaceholder: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1200&q=80',
+} as const;
+
 export const mockProfessionals: Professional[] = [
-  { name: 'Carlos Méndez', photo: 'https://picsum.photos/seed/barber-team-1/400/500', specialties: ['Corte clásico', 'Barba'] },
-  { name: 'Miguel Soto', photo: 'https://picsum.photos/seed/barber-team-2/400/500', specialties: ['Afeitado', 'Estilo moderno'] },
-  { name: 'Antonio Reyes', photo: 'https://picsum.photos/seed/barber-team-3/400/500', specialties: ['Coloración', 'Peinado'] },
+  {
+    id: 'pro-1',
+    name: 'Carlos Méndez',
+    photo: MOCK_IMAGE_URLS.team[0],
+    specialties: ['Corte clásico', 'Barba'],
+    contact: '+56 9 1234 5678',
+    socialLinks: [
+      { name: 'Instagram', url: 'https://instagram.com/carlosbarber', icon: 'mdi:instagram' },
+      { name: 'WhatsApp', url: 'https://wa.me/56912345678', icon: 'mdi:whatsapp' },
+    ],
+  },
+  {
+    id: 'pro-2',
+    name: 'Miguel Soto',
+    photo: MOCK_IMAGE_URLS.team[1],
+    specialties: ['Afeitado', 'Estilo moderno'],
+    contact: '+56 9 2345 6789',
+    socialLinks: [
+      { name: 'Instagram', url: 'https://instagram.com/miguelsoto', icon: 'mdi:instagram' },
+      { name: 'WhatsApp', url: 'https://wa.me/56923456789', icon: 'mdi:whatsapp' },
+    ],
+  },
+  {
+    id: 'pro-3',
+    name: 'Antonio Reyes',
+    photo: MOCK_IMAGE_URLS.team[2],
+    specialties: ['Coloración', 'Peinado'],
+    contact: '+56 9 3456 7890',
+    socialLinks: [
+      { name: 'Instagram', url: 'https://instagram.com/antonioreyes', icon: 'mdi:instagram' },
+      { name: 'WhatsApp', url: 'https://wa.me/56934567890', icon: 'mdi:whatsapp' },
+    ],
+  },
 ];
 
 export const mockSchedules: ScheduleItem[] = [
@@ -83,12 +137,44 @@ export const mockTrust: TrustData = {
 };
 
 export const mockGalleryImages: string[] = [
-  'https://picsum.photos/seed/gallery-1/600/600',
-  'https://picsum.photos/seed/gallery-2/600/600',
-  'https://picsum.photos/seed/gallery-3/600/600',
-  'https://picsum.photos/seed/gallery-4/600/600',
-  'https://picsum.photos/seed/gallery-5/600/600',
-  'https://picsum.photos/seed/gallery-6/600/600',
-  'https://picsum.photos/seed/gallery-7/600/600',
-  'https://picsum.photos/seed/gallery-8/600/600',
+  ...MOCK_IMAGE_URLS.gallery,
 ];
+
+/** Devuelve la disponibilidad mock de un día para el calendario de reservas */
+export function getDayAvailability(date: Date): DayAvailability {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  if (d.getTime() < today.getTime()) return 'past';
+  const dayOfWeek = d.getDay();
+  if (dayOfWeek === 0) return 'full';
+  if (dayOfWeek === 6) return 'few_slots';
+  const day = d.getDate();
+  if (day % 7 === 0) return 'full';
+  if (day % 5 === 0) return 'few_slots';
+  return 'available';
+}
+
+/** Genera slots de horario mock para una fecha (hasta 8 slots) */
+export function getTimeSlotsForDate(date: Date): TimeSlot[] {
+  const dayOfWeek = date.getDay();
+  if (dayOfWeek === 0) return [];
+  const slots: TimeSlot[] = [];
+  const baseHour = dayOfWeek === 6 ? 10 : 9;
+  const count = dayOfWeek === 6 ? 6 : 8;
+  const proIds = ['pro-1', 'pro-2', 'pro-3'];
+  for (let i = 0; i < count; i++) {
+    const h = baseHour + i;
+    const start = `${String(h).padStart(2, '0')}:00`;
+    const end = `${String(h).padStart(2, '0')}:45`;
+    const numPros = (i % 3) + 1;
+    slots.push({
+      id: `slot-${date.getTime()}-${i}`,
+      start,
+      end,
+      professionalIds: proIds.slice(0, numPros),
+    });
+  }
+  return slots;
+}

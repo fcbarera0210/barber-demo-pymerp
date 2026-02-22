@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import type { Testimonial } from '../types';
@@ -13,7 +12,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-black text-white uppercase mb-2">Testimonios</h2>
-          <div className="w-20 h-1 bg-red-600 mx-auto" />
+          <div className="section-bar mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -24,9 +23,9 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-6 sm:p-8 bg-zinc-900/60 border-l-4 border-red-600 rounded-r-lg"
+              className="p-6 sm:p-8 bg-zinc-900/60 border-l-4 border-accent rounded-r-lg shadow-sm"
             >
-              <div className="flex gap-1 text-red-600 mb-4">
+              <div className="flex gap-1 text-accent mb-4">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Icon key={i} icon={i < t.rating ? 'mdi:star' : 'mdi:star-outline'} className="text-lg" />
                 ))}

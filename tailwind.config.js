@@ -7,7 +7,14 @@ export default {
     './theme/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        accent: {
+          DEFAULT: 'var(--accent)',
+          hover: 'var(--accent-hover)',
+        },
+      },
+    },
   },
   plugins: [],
 };

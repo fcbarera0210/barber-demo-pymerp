@@ -1,20 +1,14 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import type { Company } from '../types';
 
 interface HeroSectionProps {
   company: Company;
-  onReserve?: () => void;
+  heroImage?: string;
   onVerServicios?: () => void;
 }
 
-const HERO_IMAGE = 'https://picsum.photos/seed/barber-hero/1920/1080';
-
-export function HeroSection({ company, onReserve, onVerServicios }: HeroSectionProps) {
-  const handleReserve = () => {
-    onReserve?.() ?? (typeof window !== 'undefined' && window.alert('Reserva (mock): Próximamente podrás reservar aquí.'));
-  };
+export function HeroSection({ company, heroImage, onVerServicios }: HeroSectionProps) {
   const handleVerServicios = () => {
     onVerServicios?.() ?? (typeof document !== 'undefined' && document.querySelector('#servicios')?.scrollIntoView({ behavior: 'smooth' }));
   };
@@ -23,7 +17,7 @@ export function HeroSection({ company, onReserve, onVerServicios }: HeroSectionP
     <section id="hero" className="barberias-aureo-hero relative min-h-[100vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={HERO_IMAGE}
+          src={heroImage ?? ''}
           alt="Barbería"
           className="w-full h-full object-cover grayscale brightness-50"
           onError={(e) => {
@@ -45,14 +39,14 @@ export function HeroSection({ company, onReserve, onVerServicios }: HeroSectionP
               company.heroTitle.includes('LOOK IMPECABLE') ? (
                 <>
                   {company.heroTitle.replace(' LOOK IMPECABLE', ' ')}
-                  <span className="text-red-600"> LOOK IMPECABLE</span>
+                  <span className="text-accent"> LOOK IMPECABLE</span>
                 </>
               ) : (
                 company.heroTitle
               )
             ) : (
               <>
-                MANTENDREMOS EN TI UN <span className="text-red-600">LOOK IMPECABLE</span>
+                MANTENDREMOS EN TI UN <span className="text-accent">LOOK IMPECABLE</span>
               </>
             )}
           </h1>
@@ -60,13 +54,13 @@ export function HeroSection({ company, onReserve, onVerServicios }: HeroSectionP
             <p className="text-gray-300 text-lg mb-8 max-w-xl">{company.heroDescription}</p>
           )}
 
-          <div className="space-y-4 text-gray-400 mb-10 border-l-2 border-red-600 pl-6">
+          <div className="space-y-4 text-gray-400 mb-10 border-l-2 border-accent pl-6">
             <p className="flex items-center gap-3 text-sm sm:text-base">
-              <Icon icon="mdi:map-marker" className="text-red-600 text-xl shrink-0" />
+              <Icon icon="mdi:map-marker" className="text-accent text-xl shrink-0" />
               {company.address}
             </p>
             <p className="flex items-center gap-3 text-sm sm:text-base">
-              <Icon icon="mdi:phone" className="text-red-600 text-xl shrink-0" />
+              <Icon icon="mdi:phone" className="text-accent text-xl shrink-0" />
               {company.phone}
             </p>
           </div>
@@ -74,15 +68,8 @@ export function HeroSection({ company, onReserve, onVerServicios }: HeroSectionP
           <div className="flex flex-wrap gap-4">
             <button
               type="button"
-              onClick={handleReserve}
-              className="bg-red-600 text-white px-8 py-4 text-sm font-bold tracking-widest hover:bg-white hover:text-black transition-all transform hover:scale-105 active:scale-95"
-            >
-              Reservar ahora
-            </button>
-            <button
-              type="button"
               onClick={handleVerServicios}
-              className="border-2 border-white/80 text-white px-8 py-4 text-sm font-bold tracking-widest hover:bg-white hover:text-black transition-all"
+              className="btn-accent border-2 border-white/80 text-white px-8 py-4 text-sm font-bold tracking-widest hover:bg-white/10 hover:border-white transition-all rounded-sm"
             >
               Ver servicios
             </button>
@@ -91,7 +78,7 @@ export function HeroSection({ company, onReserve, onVerServicios }: HeroSectionP
       </div>
 
       <div className="absolute bottom-8 left-4 sm:left-6 flex items-center gap-4">
-        <div className="w-16 h-1 bg-red-600" />
+        <div className="section-bar w-16" />
         <div className="w-8 h-1 bg-gray-600" />
         <div className="w-8 h-1 bg-gray-600" />
       </div>

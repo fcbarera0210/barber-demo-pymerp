@@ -1,4 +1,3 @@
-import React from 'react';
 import { Icon } from '@iconify/react';
 import type { Company } from '../types';
 
@@ -15,7 +14,7 @@ export function FooterSection({ company }: FooterSectionProps) {
             {company.logo ? (
               <img src={company.logo} alt={company.name} className="h-8 w-auto" />
             ) : (
-              <div className="w-8 h-8 bg-red-600 flex items-center justify-center transform -skew-x-12">
+              <div className="w-8 h-8 bg-accent flex items-center justify-center transform -skew-x-12">
                 <span className="font-black italic text-xl text-white">{company.name.charAt(0)}</span>
               </div>
             )}
@@ -29,7 +28,7 @@ export function FooterSection({ company }: FooterSectionProps) {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 bg-zinc-900 text-white hover:bg-red-600 transition-colors rounded-sm"
+                  className="p-2 bg-zinc-900 text-white hover:bg-accent transition-colors rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   aria-label={s.name}
                 >
                   <Icon icon={s.icon} className="text-xl" />

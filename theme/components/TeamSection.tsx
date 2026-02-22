@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import type { Professional } from '../types';
 
@@ -12,7 +11,7 @@ export function TeamSection({ professionals }: TeamSectionProps) {
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl font-black text-white uppercase mb-2">Equipo</h2>
-          <div className="w-20 h-1 bg-red-600 mx-auto" />
+          <div className="section-bar mx-auto" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
